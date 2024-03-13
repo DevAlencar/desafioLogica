@@ -205,7 +205,7 @@ public class TrueTest extends Input {
                 // cond
                 if (auxC[indexCone] == '>') {
                     for (int s = 0; s < qttTests; s++) {
-                        if (table[s][colB] == 0) {
+                        if (table[s][colA] == 1 && table[s][colB] == 0) {
                             table[s][i] = 0;
                         } else {
                             table[s][i] = 1;
