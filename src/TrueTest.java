@@ -34,7 +34,7 @@ public class TrueTest extends Input {
         qttTests = (int) Math.pow(2, symbols.size());
     }
 
-    public int[][] createTests(String logicalSentence) {
+    public void createTests(String logicalSentence) {
         casosTeste();
         ArrayList<String> exp = new ArrayList<String>();
         char wordArray[] = logicalSentence.toCharArray();
@@ -64,8 +64,12 @@ public class TrueTest extends Input {
                 ArrayList<Character> auxiliar = new ArrayList<Character>();
                 int moveD = i;
 
-                while (!isClosePunctuation(wordArray[moveD])) {
+                if (isSymbol(wordArray[i + 1])) {
                     moveD++;
+                } else {
+                    while (!isClosePunctuation(wordArray[moveD])) {
+                        moveD++;
+                    }
                 }
 
                 for (int k = 0; k <= moveD - i; k++) {
@@ -73,10 +77,7 @@ public class TrueTest extends Input {
                 }
 
                 String replace = auxiliar.toString();
-                replace = replace.replaceAll(",", "");
-                replace = replace.replaceAll("\\[", "");
-                replace = replace.replaceAll("\\]", "");
-                replace = replace.replaceAll(" ", "");
+                replace = resolveString(replace);
                 if (replace.length() == 3) {
                     replace = replace.replaceAll("\\)", "");
                 }
@@ -112,10 +113,7 @@ public class TrueTest extends Input {
                     auxiliar.add(wordArray[moveE + k]);
                 }
                 String replace = auxiliar.toString();
-                replace = replace.replaceAll(",", "");
-                replace = replace.replaceAll("\\[", "");
-                replace = replace.replaceAll("\\]", "");
-                replace = replace.replaceAll(" ", "");
+                replace = resolveString(replace);
                 exp.add(replace);
                 exp.sort(Comparator.comparing(String::length));
             }
@@ -160,15 +158,15 @@ public class TrueTest extends Input {
                 while (!isPunctuation(auxC[moveE])) {
                     moveE--;
                 }
+                if (moveE > 0 && isEspConnective(auxC[moveE - 1])) {
+                    moveE--;
+                }
                 for (int u = 0; u < indexCone - moveE; u++) {
                     auxiliarC.add(auxC[moveE + u]);
                 }
                 String s1 = new String(auxiliarC.toString());
-                s1 = s1.replaceAll(",", "");
-                s1 = s1.replaceAll(" ", "");
-                s1 = s1.replaceAll("\\[", "");
-                s1 = s1.replaceAll("\\]", "");
-                if (s1.length() == 2) {
+                s1 = resolveString(s1);
+                if (s1.length() == 2 || s1.length() == 3) {
                     s1 = s1.replaceAll("\\(", "");
                 }
 
@@ -181,10 +179,7 @@ public class TrueTest extends Input {
                 }
                 auxiliarC.add(')');
                 String s2 = new String(auxiliarC.toString());
-                s2 = s2.replaceAll(",", "");
-                s2 = s2.replaceAll(" ", "");
-                s2 = s2.replaceAll("\\[", "");
-                s2 = s2.replaceAll("\\]", "");
+                s2 = resolveString(s2);
                 if (s2.length() == 2 || s2.length() == 3) {
                     s2 = s2.replaceAll("\\)", "");
                 }
@@ -230,6 +225,8 @@ public class TrueTest extends Input {
         boolean allF = true;
         boolean oneT = false;
         boolean oneF = false;
+        ArrayList<Integer> indicesTrue = new ArrayList<Integer>();
+        ArrayList<Integer> indicesFalse = new ArrayList<Integer>();
         int result[] = new int[qttTests];
 
         for (int i = 0; i < exp.size(); i++) {
@@ -251,9 +248,11 @@ public class TrueTest extends Input {
 
         for (int i = 0; i < qttTests; i++) {
             if (result[i] == 0) {
+                indicesFalse.add(i);
                 oneF = true;
                 allT = false;
             } else if (result[i] == 1) {
+                indicesTrue.add(i);
                 oneT = true;
                 allF = false;
             }
@@ -276,7 +275,62 @@ public class TrueTest extends Input {
             System.out.println(tipo);
         }
 
-        return table;
+        ArrayList<Character> resultadoFN = new ArrayList<Character>();
 
+        // creating fnd
+        for (int i = 0; i < indicesTrue.size(); i++) {
+            resultadoFN.add('(');
+            for (int j = 0; j < symbols.size(); j++) {
+                if (table[indicesTrue.get(i)][j] == 1) {
+                    resultadoFN.add(symbols.get(j));
+                } else {
+                    resultadoFN.add('~');
+                    resultadoFN.add(symbols.get(j));
+                }
+                if (j < symbols.size() - 1) {
+                    resultadoFN.add('^');
+                }
+            }
+            resultadoFN.add(')');
+            if (i < indicesTrue.size() - 1) {
+                resultadoFN.add('|');
+            }
+        }
+        String resultado = resultadoFN.toString();
+        resultado = resolveString(resultado);
+        System.out.println("FND: " + resultado);
+        resultadoFN.clear();
+
+        for (int i = 0; i < indicesFalse.size(); i++) {
+            resultadoFN.add('(');
+            for (int j = 0; j < symbols.size(); j++) {
+                if (table[indicesFalse.get(i)][j] == 0) {
+                    resultadoFN.add(symbols.get(j));
+                } else {
+                    resultadoFN.add('~');
+                    resultadoFN.add(symbols.get(j));
+                }
+                if (j < symbols.size() - 1) {
+                    resultadoFN.add('|');
+                }
+            }
+            resultadoFN.add(')');
+            if (i < indicesFalse.size() - 1) {
+                resultadoFN.add('^');
+            }
+        }
+        resultado = resultadoFN.toString();
+        resultado = resolveString(resultado);
+        System.out.println("FNC: " + resultado);
+    }
+
+    private String resolveString(String a) {
+
+        a = a.replaceAll(",", "");
+        a = a.replaceAll(" ", "");
+        a = a.replaceAll("\\[", "");
+        a = a.replaceAll("\\]", "");
+
+        return a;
     }
 }
