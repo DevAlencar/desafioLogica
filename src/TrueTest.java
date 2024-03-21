@@ -145,6 +145,9 @@ public class TrueTest extends Input {
             } else {
                 ArrayList<Character> auxiliarC = new ArrayList<Character>();
                 int indexCone = ((auxC.length + 1) / 2) - 1;
+                if (!isConnective(auxC[indexCone])) {
+                    indexCone++;
+                }
                 for (int y = 0; y < auxC.length; y++) {
                     if (y > 0) {
                         if (isConnective(auxC[y - 1]) && isPunctuation(auxC[y])) {
@@ -301,6 +304,7 @@ public class TrueTest extends Input {
         System.out.println("FND: " + resultado);
         resultadoFN.clear();
 
+        // creating fnc
         for (int i = 0; i < indicesFalse.size(); i++) {
             resultadoFN.add('(');
             for (int j = 0; j < symbols.size(); j++) {
