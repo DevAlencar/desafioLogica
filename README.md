@@ -5,7 +5,7 @@ Projeto realizado para Lógica aplicada à computação. <br/>
 </p>
 
 <p align="center">
-   <a href="#-comoutilizar">Como utilizar</a>
+   <a href="#-comoutilizar">Como utilizar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-licença">Licença</a>
 </p>
