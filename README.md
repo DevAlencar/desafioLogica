@@ -5,7 +5,7 @@ Projeto realizado para Lógica aplicada à computação. <br/>
 </p>
 
 <p align="center">
-   <a href="#-comoutilizar">Como utilizar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+   <a href="#-como_utilizar">Como utilizar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-licença">Licença</a>
 </p>
@@ -17,13 +17,9 @@ Projeto realizado para Lógica aplicada à computação. <br/>
 <br>
 
 ---
-## 💬 Como utilizar
+## 💬 Como_utilizar
 
-- O programa necessíta a ultilização correta de parênteses, informando quando há um erro:
-<p align="center">
-  <img alt="Imagem Erro de parênteses" src="github/img1.jpeg" width="100%">
-</p>
-
+- O programa necessíta a ultilização correta de parênteses, informando quando há um erro;
 - Deve ser utilizado os símbolos P, Q, R e S, se necessários adicionar mais é só adicionar na função "isSymbol";
 - Deve ser utilizado os conectivos: '^'(com o significado 'e'), '|'(com o significado 'ou'), '>'(com o significado 'implica'), '='(com o significado 'bi-implica') e '~'(com o significado 'negado');
 - Exemplo de expressões que podem ser utilizadas: (~(P|Q)=(~P^~Q)), ~~~(P|Q), ((P^Q)|(~R>S)) e entre outros...;
