@@ -169,8 +169,9 @@ public class TrueTest extends Input {
                 }
                 String s1 = new String(auxiliarC.toString());
                 s1 = resolveString(s1);
-                if (s1.length() == 2 || s1.length() == 3) {
+                if (s1.length() == 2 || s1.length() == 3 || s1.length() == 4) {
                     s1 = s1.replaceAll("\\(", "");
+                    s1 = s1.replaceAll("\\)", "");
                 }
 
                 colA = exp.indexOf(s1);
@@ -183,10 +184,13 @@ public class TrueTest extends Input {
                 auxiliarC.add(')');
                 String s2 = new String(auxiliarC.toString());
                 s2 = resolveString(s2);
-                if (s2.length() == 2 || s2.length() == 3) {
+                if (s2.length() == 2 || s2.length() == 3 || s2.length() == 4) {
                     s2 = s2.replaceAll("\\)", "");
+                    s2 = s2.replaceAll("\\(", "");
                 }
                 colB = exp.indexOf(s2);
+                System.out.println(s1);
+                System.out.println(s2);
 
                 // or
                 if (auxC[indexCone] == '|') {

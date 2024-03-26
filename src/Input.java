@@ -98,7 +98,7 @@ public class Input {
     }
 
     public boolean isSymbol(char obj) {
-        if (obj == 'P' || obj == 'Q' || obj == 'R' || obj == 'S') {
+        if (obj == 'P' || obj == 'Q' || obj == 'R' || obj == 'S' || obj == 'T' || obj == 'U') {
             return true;
         }
         return false;
